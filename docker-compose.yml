@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sample-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sample-mcp:latest
+    container_name: sample-mcp
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=False
+    volumes:
+      - ./services:/app/services
+    restart: unless-stopped
+    command: python -m services.sample.main

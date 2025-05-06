@@ -1,0 +1,58 @@
+name: sample-mcp
+description: Sample MCP server with clean architecture
+version: 0.1.0
+tools:
+  - name: get_greeting
+    description: Returns a greeting message
+    input_schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the person to greet
+      required:
+        - name
+    output_schema:
+      type: object
+      properties:
+        greeting:
+          type: string
+          description: Greeting message
+        timestamp:
+          type: string
+          description: Timestamp of when the greeting was generated
+
+  - name: calculate
+    description: Performs a simple calculation
+    input_schema:
+      type: object
+      properties:
+        operation:
+          type: string
+          description: The operation to perform (add, subtract, multiply, divide)
+          enum: [add, subtract, multiply, divide]
+        a:
+          type: number
+          description: First operand
+        b:
+          type: number
+          description: Second operand
+      required:
+        - operation
+        - a
+        - b
+    output_schema:
+      type: object
+      properties:
+        result:
+          type: number
+          description: Result of the calculation
+        operation:
+          type: string
+          description: The operation that was performed
+
+resources:
+  - uri: /health
+    description: Health check endpoint
+  - uri: /info
+    description: Information about the MCP server
